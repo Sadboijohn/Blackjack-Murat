@@ -1,0 +1,82 @@
+﻿<Window x:Class="Blackjack.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Blackjack"
+        mc:Ignorable="d"
+        
+        Title="Blackjack" Height="480" Width="800"      >
+    <Window.Background>
+        <ImageBrush ImageSource="Background/bg.jpg" Stretch="UniformToFill"/>
+    </Window.Background>
+
+    <Grid>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Balance label -->
+        <Label x:Name="balanceLabel" Grid.Row="0" Grid.Column="0" Content="Balance: 100" Foreground="White"  />
+
+        <!--  -->
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
+            <Label x:Name="betLabel" Content="{Binding ElementName=betSlider,Path=Value}" Height="50" Width="57" Background="White"/>
+        </StackPanel>
+        <!-- Bet slider -->
+        <Slider x:Name="betSlider" Grid.Row="0" Grid.Column="1" Minimum="0" Maximum="100" Value="0" SmallChange="0" />
+
+        <!-- Player hand -->
+        <StackPanel x:Name="playerHandPanel" Grid.Row="1" Grid.Column="0"  Grid.RowSpan="2">
+            <Label x:Name="playerHandLabel" Content="Player's Hand:" Background="White" />
+            <ItemsControl x:Name="playerHandList">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Image Source="{Binding}" Stretch="Uniform" HorizontalAlignment="Left" Width="120" Height="200"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+
+        <Label x:Name="playerCardCountLabel" Content="Card Count: 0" Background="White" Margin="0,43,273,72" Grid.Row="2" />
+        <Label x:Name="dealerCardCountLabel" Content="Card Count: 0" Background="White" Grid.Column="1" Margin="0,40,274,72" Grid.Row="2" />
+
+        <!-- Dealer hand -->
+        <StackPanel x:Name="dealerHandPanel" Grid.Row="1" Grid.Column="1">
+            <Label x:Name="dealerHandLabel" Content="Dealer's Hand:" Background="White" />
+            <ItemsControl x:Name="dealerHandList">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Image Source="{Binding}" Stretch="Uniform" Width="120" Height="200" HorizontalAlignment="Center" Margin="0,0,25,0" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+
+
+        <!-- Buttons -->
+        <StackPanel x:Name="buttonPanel" Grid.Row="2" Grid.ColumnSpan="2" Margin="0,73,0,0">
+            <Button x:Name="hitButton" Content="Hit" Click="hitButton_Click" />
+            <Button x:Name="standButton" Content="Stand" Click="standButton_Click" />
+            <Button x:Name="resetButton" Content="Reset" Click="resetButton_Click" />
+        </StackPanel>
+        <Grid Grid.Row="1"/>
+    </Grid>
+</Window>
